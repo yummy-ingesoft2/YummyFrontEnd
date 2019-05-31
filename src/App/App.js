@@ -1,36 +1,28 @@
 import * as React from 'react';
 import { Component } from 'react';
+import { Router, Route, Switch } from "react-router-dom";
 import { Text, TextInput, Button, View, StyleSheet, Image, RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native';
 import { Constants } from 'expo';
+import { connect } from "react-redux";
+
+//import { history } from "../_helpers";
+//import { alertActions } from "../_actions";
+//import { PrivateRoute } from "../_utils";
+
+import Navbar from "../common/NavBar/NavBar.js";
+
 
 // You can import from local files
-import AssetExample from './components/AssetExample';
+import AssetExample from '../components/AssetExample';
 
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
 
 
-function LandingPageYummy(){
-    return (
-      <View style={styles.container}>
-        <Card style={styles.card}>
-          <AssetExample />
-          <Text style={styles.txWelcome}>
-            Welcome!
-          </Text>
-          <Text style={styles.paragraph}>
-            The best choice in your menu
-          </Text>
-        </Card>
-          <Image
-            style={styles.image}
-            resizeMode="cover"
-            source={{ path: '/assets/yummy-logo.jpeg' }}
-          />
-          <Text style={styles.name}>{}</Text>
-      </View>
-    );
-}
+//screens
+import LandingPageYummy from "../screens/LandingPageYummy";
+import LoginPageYummy from "../screens/LoginPageYummy"
+import RegisterPageYummy from "../screens/RegisterPageYummy"
 
 class LoginPageYummy extends Component {
   constructor(props){
@@ -83,70 +75,6 @@ class LoginPageYummy extends Component {
         <View style={styles.buttonSignUp}>
           <Button
             title="Regístrate"
-            color="#DF74A2"
-        />
-        </View>
-      </View>
-
-    );
-  }
-
-}
-
-class RegisterPageYummy extends Component {
-  constructor(props){
-    super(props);
-
-    this.state = {
-
-    };
-  }
-  render(){
-    return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.logmail}
-          placeholder="Nombre"
-          onChangeText={(text) => this.setState({text})}
-        />
-        <TextInput
-          style={styles.logmail}
-          placeholder="Apellido"
-          onChangeText={(text) => this.setState({text})}
-        />
-        <TextInput
-          style={styles.logmail}
-          type="date"
-          placeholder="Fecha de nacimiento"
-          onChangeText={(text) => this.setState({text})}
-        />
-        <TextInput
-          style={styles.logmail}
-          type="email"
-          placeholder="Email"
-          onChangeText={(text) => this.setState({text})}
-        />
-        <TextInput
-          style={styles.logmail}
-          placeholder="Teléfono"
-          onChangeText={(text) => this.setState({text})}
-        />
-        <TextInput
-          style={styles.logmail}
-          type="pasword"
-          placeholder="Contraseña"
-          onChangeText={(text) => this.setState({text})}
-        />
-        <TextInput
-          style={styles.logpass}
-          type="pasword"
-          placeholder="Confirmar Contraseña"
-          onChangeText={(text) => this.setState({text})}
-        />
-        <View style = {styles.lineStyle} />
-        <View style={styles.buttonSignUp}>
-          <Button
-            title="Registrar"
             color="#DF74A2"
         />
         </View>
