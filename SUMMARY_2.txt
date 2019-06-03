@@ -1,0 +1,10 @@
+Desarrollado:
+Validacion de correos y contraseñas en la pagina de registro y login - Paula Caballero
+Navegacion entre pantallas - Sebastian Guerrero
+Orden de los archivos de pantallas en nueva estructura de carpetas - Sebastian Guerrero y Paula Caballero
+Creacion y configuracion de rutas - Sebastian Guerrero y Paula Caballero
+
+Por desarrollar:
+Conexión con el api en rails
+Consumo de endpoints
+Implementacion redux
