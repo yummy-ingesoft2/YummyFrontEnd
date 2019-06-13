@@ -4,21 +4,14 @@ import { Router, Route, Switch } from "react-router-dom";
 import { Text, TextInput, Button, View, StyleSheet, Image, RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native';
 import { Constants } from 'expo';
 import { connect } from "react-redux";
-
 //import { history } from "../_helpers";
 //import { alertActions } from "../_actions";
 //import { PrivateRoute } from "../_utils";
-
 import Navbar from "../common/NavBar/NavBar.js";
-
-
 // You can import from local files
 import AssetExample from '../components/AssetExample';
-
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
-
-
 //screens
 import LandingPageYummy from "../screens/LandingPageYummy";
 import LoginPageYummy from "../screens/LoginPageYummy"
@@ -27,9 +20,7 @@ import RegisterPageYummy from "../screens/RegisterPageYummy"
 class LoginPageYummy extends Component {
   constructor(props){
     super(props);
-
     this.state = {
-
     };
   }
   render(){

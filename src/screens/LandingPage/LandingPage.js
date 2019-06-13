@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom';
 import LoginPage from '../LoginPage/LoginPage';
 
 export default class LandingPage extends Component {
-
   render(){
-
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.txWelcome}>
@@ -21,9 +20,10 @@ export default class LandingPage extends Component {
         <Button
         title="I'm hungry"
         color="#DF74A2"
-        onPress={() => navigate(LoginPage)}
+        onPress={() =>
+            navigate('LoginPage')
+          }
         />
-
     </View>
     );
   }

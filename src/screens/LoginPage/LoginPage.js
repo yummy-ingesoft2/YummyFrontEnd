@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Text, TextInput, View, StyleSheet, Image, Button } from 'react-native';
 import { Constants } from 'expo';
 
-export default class LoginPageYummy extends Component {
+export default class LoginPage extends Component {
   constructor(props){
       super(props);
 

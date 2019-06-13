@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Navigator, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import AppNavigator from './src/AppNavigator';
 import LandingPage from './src/screens/LandingPage/LandingPage';
-
 
 export default class App extends React.Component {
   render() {
