@@ -1,32 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View, Navigator, Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import AppNavigator from './src/AppNavigator';
+import { createStackNavigator, createAppContainer, AsyncStorage } from 'react-navigation';
 import LandingPage from './src/screens/LandingPage/LandingPage';
+import LoginPage from './src/screens/LoginPage/LoginPage';
+import RegisterPage from './src/screens/RegisterPage/RegisterPage';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Image style={styles.logo} source={require('./assets/yummy-logo.jpeg')} />
-        <LandingPage/>
-      </View>
-    );
+const AppNavigator = createStackNavigator({
+  Landing: { screen: LandingPage },
+  Login: { screen: LoginPage },
+  Register: { screen: RegisterPage }
+},
+{
+    initialRouteName: 'Landing'
   }
-}
+)
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    backgroundColor: '#d93078',
-    alignItems: 'center',
-    paddingTop: 25
-  },
-  logo: {
-    height: 250,
-    width: 250,
-    borderRadius: 160,
-    marginTop: 80
-  }
-});
+export default createAppContainer(AppNavigator)

@@ -133,36 +133,38 @@ export default class RegisterPage extends Component {
         <TextInput
           style={[styles.logmail, !this.state.lastnameValidate? styles.error:null]}
           placeholder="Apellido"
-          onChangeText={(text) => this.setState(text, 'lastname')}
+          onChangeText={(text) => this.validate(text, 'lastname')}
         />
         <TextInput
           style={styles.logmail}
           type="date"
           placeholder="Fecha de nacimiento"
-          onChangeText={(text) => this.setState({text})}
+          onChangeText={(text) => this.validate({text})}
         />
         <TextInput
           style={[styles.logmail, !this.state.emailValidate? styles.error:null]}
           type="email"
           placeholder="Email"
-          onChangeText={(text) => this.setState(text, 'email')}
+          onChangeText={(text) => this.validate(text, 'email')}
         />
         <TextInput
           style={[styles.logmail, !this.state.phoneValidate? styles.error:null]}
           placeholder="Teléfono"
-          onChangeText={(text) => this.setState(text, 'phone')}
+          onChangeText={(text) => this.validate(text, 'phone')}
         />
         <TextInput
           style={[styles.logpass, !this.state.passwordValidate? styles.error:null]}
           type="password"
           placeholder="Contraseña"
-          onChangeText={(text) => this.setState(text, 'password')}
+          secureTextEntry={true}
+          onChangeText={(text) => this.validate(text, 'password')}
         />
         <TextInput
           style={[styles.logpass, !this.state.confirmPasswordValidate? styles.error:null]}
           type="password"
           placeholder="Confirmar Contraseña"
-          onChangeText={(text) => this.setState(text, 'confirmPassword')}
+          secureTextEntry={true}
+          onChangeText={(text) => this.validate(text, 'confirmPassword')}
         />
         <View style = {styles.lineStyle} />
         <View style={styles.buttonSignUp}>

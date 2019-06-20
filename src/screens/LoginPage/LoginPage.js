@@ -66,6 +66,7 @@ export default class LoginPage extends Component {
           style={[styles.logpass, !this.state.passwordValidate? styles.error:null]}
           type="password"
           placeholder="Your password"
+          secureTextEntry={true}
           onChangeText={(text) => this.validate(text, 'password')}
         />
         <View style={styles.buttonLogin}>
@@ -94,6 +95,7 @@ export default class LoginPage extends Component {
           <Button
             title="Sign Up"
             color="#DF74A2"
+            onPress={() => this.props.navigation.navigate('Register')}
             />
         </View>
       </View>
@@ -188,5 +190,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#d93078',
     color: 'white'
+  },
+  error:{
+    borderWidth: 3,
+    borderColor: 'red'
   }
 });
