@@ -21,7 +21,8 @@ export default class RegisterPage extends Component {
       password: ' ',
       passwordValidate: true,
       confirmPassword: ' ',
-      confirmPasswordValidate: true
+      confirmPasswordValidate: true,
+      confPassword: ' '
     };
   }
   validate(text, type)
@@ -29,7 +30,6 @@ export default class RegisterPage extends Component {
     var mail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
     var alph = /^[a-zA-Z]+$/
     var num = /^[0-9]+$/
-    var confPassword = ' '
     if (type == 'name')
     {
       if(alph.test(text))

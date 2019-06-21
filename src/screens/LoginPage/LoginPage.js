@@ -15,6 +15,17 @@ export default class LoginPage extends Component {
       };
     }
 
+    confirmValidaciones()
+    {
+      if(this.state.email != ' ' && this.state.password != ' ')
+      {
+        if(this.state.emailValidate && this.state.passwordValidate)
+        {
+          this.props.navigation.navigate('TabNavigator');
+        }
+      }
+    }
+
     validate(text, type)
     {
       var alph = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
@@ -73,6 +84,7 @@ export default class LoginPage extends Component {
             <Button
               title="Login"
               color="#DF74A2"
+              onPress={() => this.confirmValidaciones()}
               />
         </View>
           <View style={styles.buttonGoo}>
