@@ -10,7 +10,7 @@ import HomePage from './screens/HomePage/HomePage';
 import SearchPage from './screens/SearchPage/SearchPage';
 import ProfilePage from './screens/ProfilePage/ProfilePage';
 
-export default Tab = TabNavigator (
+export default createBottomTabNavigator (
   {
     Home: {screen: HomePage},
     Search: {screen: SearchPage},

@@ -25,6 +25,20 @@ export default class RegisterPage extends Component {
       confPassword: ' '
     };
   }
+
+  confirm(){
+    if(this.state.name != ' ' && this.state.lastname != ' ' && this.state.email != ' '
+        && this.state.phone != ' ' && this.state.password != ' ' && this.state.confirmPassword != ' ')
+    {
+      if(this.state.nameValidate && this.state.lastnameValidate && this.state.dateValidate && this.state.emailValidate
+          && this.state.phoneValidate && this.state.passwordValidate && this.state.confirmPasswordValidate)
+      {
+        return false;
+      }
+    }
+    return true;
+  }
+
   validate(text, type)
   {
     var mail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
@@ -32,6 +46,9 @@ export default class RegisterPage extends Component {
     var num = /^[0-9]+$/
     if (type == 'name')
     {
+      this.setState({
+        name:text,
+      })
       if(alph.test(text))
       {
         this.setState({
@@ -47,6 +64,9 @@ export default class RegisterPage extends Component {
     }
     else if (type == 'lastname')
     {
+      this.setState({
+        lastname:text,
+      })
       if(alph.test(text))
       {
         this.setState({
@@ -62,6 +82,9 @@ export default class RegisterPage extends Component {
     }
     else if(type == 'phone')
     {
+      this.setState({
+        phone:text,
+      })
       if(num.test(text))
       {
         this.setState({
@@ -77,6 +100,9 @@ export default class RegisterPage extends Component {
     }
     else if(type=='email')
     {
+      this.setState({
+        email:text,
+      })
       if(mail.test(text))
       {
         this.setState({
@@ -92,9 +118,12 @@ export default class RegisterPage extends Component {
     }
     else if (type=='password')
     {
+      this.setState({
+        password:text,
+      })
       if(text.length >= 8)
       {
-        confPassword = text
+        this.state.confPassword = text
         this.setState({
           passwordValidate:true,
         })
@@ -108,7 +137,10 @@ export default class RegisterPage extends Component {
     }
     else if(type == 'confirmPassword')
     {
-      if(text == confPassword)
+      this.setState({
+        confirmPassword:text,
+      })
+      if(text == this.state.confPassword)
       {
         this.setState({
           confirmPasswordValidate:true,
@@ -169,12 +201,13 @@ export default class RegisterPage extends Component {
         <View style = {styles.lineStyle} />
         <View style={styles.buttonSignUp}>
           <Button
+            disabled={this.confirm()}
             title="Registrar"
             color="#DF74A2"
+            onPress={() => this.props.navigation.navigate('TabNavigator')}
         />
         </View>
       </View>
-
     );
   }
 }

@@ -21,9 +21,10 @@ export default class LoginPage extends Component {
       {
         if(this.state.emailValidate && this.state.passwordValidate)
         {
-          this.props.navigation.navigate('TabNavigator');
+          return false;
         }
       }
+      return true;
     }
 
     validate(text, type)
@@ -31,6 +32,9 @@ export default class LoginPage extends Component {
       var alph = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
       if(type=='email')
       {
+        this.setState({
+          email:text,
+        })
         if(alph.test(text))
         {
           this.setState({
@@ -46,6 +50,9 @@ export default class LoginPage extends Component {
       }
       else if (type=='password')
       {
+        this.setState({
+          password:text,
+        })
         if(text.length >= 8)
         {
           this.setState({
@@ -84,7 +91,8 @@ export default class LoginPage extends Component {
             <Button
               title="Login"
               color="#DF74A2"
-              onPress={() => this.confirmValidaciones()}
+              disabled={this.confirmValidaciones()}
+              onPress={() => this.props.navigation.navigate('TabNavigator')}
               />
         </View>
           <View style={styles.buttonGoo}>
@@ -174,6 +182,7 @@ const styles = StyleSheet.create({
   buttonLogin: {
     height: 40,
     width: 70,
+    marginTop: 20,
     marginBottom: 15,
     marginLeft: 180,
     fontSize: 20,
