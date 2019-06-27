@@ -2,8 +2,6 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
 import { Constants } from 'expo';
-import { Link } from 'react-router-dom';
-import LoginPage from '../LoginPage/LoginPage';
 
 export default class LandingPage extends Component {
 
@@ -11,6 +9,7 @@ export default class LandingPage extends Component {
 
     return (
       <View style={styles.container}>
+        <Image style={styles.logo} source={require('../../../assets/yummy-logo.jpeg')} />
         <Text style={styles.txWelcome}>
           Welcome!
         </Text>
@@ -21,7 +20,7 @@ export default class LandingPage extends Component {
         <Button
         title="I'm hungry"
         color="#DF74A2"
-        onPress={() => navigate(LoginPage)}
+        onPress={() => this.props.navigation.navigate('Login')}
         />
 
     </View>
@@ -37,6 +36,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#d93078',
     alignItems: 'center',
     paddingTop: 25,
+  },
+  logo: {
+    height: 250,
+    width: 250,
+    borderRadius: 160,
+    marginTop: 80
   },
   txWelcome: {
     marginTop: 20,

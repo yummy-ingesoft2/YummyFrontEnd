@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Text, TextInput, View, StyleSheet, Image, Button } from 'react-native';
 import { Constants } from 'expo';
 
-export default class RegisterPageYummy extends Component {
+export default class RegisterPage extends Component {
   constructor(props){
     super(props);
 
@@ -21,17 +21,34 @@ export default class RegisterPageYummy extends Component {
       password: ' ',
       passwordValidate: true,
       confirmPassword: ' ',
-      confirmPasswordValidate: true
+      confirmPasswordValidate: true,
+      confPassword: ' '
     };
   }
+
+  confirm(){
+    if(this.state.name != ' ' && this.state.lastname != ' ' && this.state.email != ' '
+        && this.state.phone != ' ' && this.state.password != ' ' && this.state.confirmPassword != ' ')
+    {
+      if(this.state.nameValidate && this.state.lastnameValidate && this.state.dateValidate && this.state.emailValidate
+          && this.state.phoneValidate && this.state.passwordValidate && this.state.confirmPasswordValidate)
+      {
+        return false;
+      }
+    }
+    return true;
+  }
+
   validate(text, type)
   {
     var mail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
     var alph = /^[a-zA-Z]+$/
     var num = /^[0-9]+$/
-    var confPassword = ' '
     if (type == 'name')
     {
+      this.setState({
+        name:text,
+      })
       if(alph.test(text))
       {
         this.setState({
@@ -47,6 +64,9 @@ export default class RegisterPageYummy extends Component {
     }
     else if (type == 'lastname')
     {
+      this.setState({
+        lastname:text,
+      })
       if(alph.test(text))
       {
         this.setState({
@@ -62,6 +82,9 @@ export default class RegisterPageYummy extends Component {
     }
     else if(type == 'phone')
     {
+      this.setState({
+        phone:text,
+      })
       if(num.test(text))
       {
         this.setState({
@@ -77,6 +100,9 @@ export default class RegisterPageYummy extends Component {
     }
     else if(type=='email')
     {
+      this.setState({
+        email:text,
+      })
       if(mail.test(text))
       {
         this.setState({
@@ -92,9 +118,12 @@ export default class RegisterPageYummy extends Component {
     }
     else if (type=='password')
     {
+      this.setState({
+        password:text,
+      })
       if(text.length >= 8)
       {
-        confPassword = text
+        this.state.confPassword = text
         this.setState({
           passwordValidate:true,
         })
@@ -108,7 +137,10 @@ export default class RegisterPageYummy extends Component {
     }
     else if(type == 'confirmPassword')
     {
-      if(text == confPassword)
+      this.setState({
+        confirmPassword:text,
+      })
+      if(text == this.state.confPassword)
       {
         this.setState({
           confirmPasswordValidate:true,
@@ -133,46 +165,49 @@ export default class RegisterPageYummy extends Component {
         <TextInput
           style={[styles.logmail, !this.state.lastnameValidate? styles.error:null]}
           placeholder="Apellido"
-          onChangeText={(text) => this.setState(text, 'lastname')}
+          onChangeText={(text) => this.validate(text, 'lastname')}
         />
         <TextInput
           style={styles.logmail}
           type="date"
           placeholder="Fecha de nacimiento"
-          onChangeText={(text) => this.setState({text})}
+          onChangeText={(text) => this.validate({text})}
         />
         <TextInput
           style={[styles.logmail, !this.state.emailValidate? styles.error:null]}
           type="email"
           placeholder="Email"
-          onChangeText={(text) => this.setState(text, 'email')}
+          onChangeText={(text) => this.validate(text, 'email')}
         />
         <TextInput
           style={[styles.logmail, !this.state.phoneValidate? styles.error:null]}
           placeholder="Teléfono"
-          onChangeText={(text) => this.setState(text, 'phone')}
+          onChangeText={(text) => this.validate(text, 'phone')}
         />
         <TextInput
           style={[styles.logpass, !this.state.passwordValidate? styles.error:null]}
           type="password"
           placeholder="Contraseña"
-          onChangeText={(text) => this.setState(text, 'password')}
+          secureTextEntry={true}
+          onChangeText={(text) => this.validate(text, 'password')}
         />
         <TextInput
           style={[styles.logpass, !this.state.confirmPasswordValidate? styles.error:null]}
           type="password"
           placeholder="Confirmar Contraseña"
-          onChangeText={(text) => this.setState(text, 'confirmPassword')}
+          secureTextEntry={true}
+          onChangeText={(text) => this.validate(text, 'confirmPassword')}
         />
         <View style = {styles.lineStyle} />
         <View style={styles.buttonSignUp}>
           <Button
+            disabled={this.confirm()}
             title="Registrar"
             color="#DF74A2"
+            onPress={() => this.props.navigation.navigate('TabNavigator')}
         />
         </View>
       </View>
-
     );
   }
 }

@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Text, TextInput, View, StyleSheet, Image, Button } from 'react-native';
 import { Constants } from 'expo';
 
-export default class LoginPageYummy extends Component {
+export default class LoginPage extends Component {
   constructor(props){
       super(props);
 
@@ -15,11 +15,26 @@ export default class LoginPageYummy extends Component {
       };
     }
 
+    confirmValidaciones()
+    {
+      if(this.state.email != ' ' && this.state.password != ' ')
+      {
+        if(this.state.emailValidate && this.state.passwordValidate)
+        {
+          return false;
+        }
+      }
+      return true;
+    }
+
     validate(text, type)
     {
       var alph = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
       if(type=='email')
       {
+        this.setState({
+          email:text,
+        })
         if(alph.test(text))
         {
           this.setState({
@@ -35,6 +50,9 @@ export default class LoginPageYummy extends Component {
       }
       else if (type=='password')
       {
+        this.setState({
+          password:text,
+        })
         if(text.length >= 8)
         {
           this.setState({
@@ -66,12 +84,15 @@ export default class LoginPageYummy extends Component {
           style={[styles.logpass, !this.state.passwordValidate? styles.error:null]}
           type="password"
           placeholder="Your password"
+          secureTextEntry={true}
           onChangeText={(text) => this.validate(text, 'password')}
         />
         <View style={styles.buttonLogin}>
             <Button
               title="Login"
               color="#DF74A2"
+              disabled={this.confirmValidaciones()}
+              onPress={() => this.props.navigation.navigate('TabNavigator')}
               />
         </View>
           <View style={styles.buttonGoo}>
@@ -94,6 +115,7 @@ export default class LoginPageYummy extends Component {
           <Button
             title="Sign Up"
             color="#DF74A2"
+            onPress={() => this.props.navigation.navigate('Register')}
             />
         </View>
       </View>
@@ -160,6 +182,7 @@ const styles = StyleSheet.create({
   buttonLogin: {
     height: 40,
     width: 70,
+    marginTop: 20,
     marginBottom: 15,
     marginLeft: 180,
     fontSize: 20,
@@ -188,5 +211,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#d93078',
     color: 'white'
+  },
+  error:{
+    borderWidth: 3,
+    borderColor: 'red'
   }
 });
