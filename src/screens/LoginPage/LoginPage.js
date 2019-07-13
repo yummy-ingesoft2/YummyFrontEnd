@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Text, TextInput, View, StyleSheet, Image, Button } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Image, Button, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { Constants } from 'expo';
 
 export default class LoginPage extends Component {
@@ -70,55 +70,66 @@ export default class LoginPage extends Component {
 
   render(){
     return (
-      <View style={styles.container}>
-        <Image style={styles.logo}
-        source={require('../../../assets/yummy-logo.jpeg')}
-        />
-        <TextInput
-          style={[styles.logmail, !this.state.emailValidate? styles.error:null]}
-          type="email"
-          placeholder="Your email"
-          onChangeText={(text) => this.validate(text, 'email')}
-        />
-        <TextInput
-          style={[styles.logpass, !this.state.passwordValidate? styles.error:null]}
-          type="password"
-          placeholder="Your password"
-          secureTextEntry={true}
-          onChangeText={(text) => this.validate(text, 'password')}
-        />
-        <View style={styles.buttonLogin}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
+          <Image style={styles.logo}
+          source={require('../../../assets/yummy-logo.jpeg')}
+          />
+          <TextInput
+            style={[styles.inputTxt, !this.state.emailValidate? styles.error:null]}
+            type="email"
+            placeholder="Email"
+            onChangeText={(text) => this.validate(text, 'email')}
+          />
+          <TextInput
+            style={[styles.inputTxt, !this.state.passwordValidate? styles.error:null]}
+            type="password"
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={(text) => this.validate(text, 'password')}
+          />
+          <View style={styles.buttonLogin}>
             <Button
               title="Login"
               color="#DF74A2"
               disabled={this.confirmValidaciones()}
               onPress={() => this.props.navigation.navigate('TabNavigator')}
-              />
-        </View>
-          <View style={styles.buttonGoo}>
-            <Button
-              title="Google"
-              color="#591432"
-              />
-          </View>
-          <View style={styles.buttonFace}>
-            <Button
-              title="Face"
-              color="#992255"
-              />
-          </View>
-          <View style = {styles.lineStyle} />
-            <Text style={styles.textSignUp}>
-                ¿Aún no tienes cuenta?
-            </Text>
-        <View style={styles.buttonSignUp}>
-          <Button
-            title="Sign Up"
-            color="#DF74A2"
-            onPress={() => this.props.navigation.navigate('Register')}
             />
-        </View>
-      </View>
+          </View>
+
+          <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5}> 
+            <Image 
+              source={require('../../assets/facebook.jpeg')} 
+              style={styles.ImageIconStyle} 
+            /> 
+            <View style={styles.SeparatorLine} /> 
+            <Text style={styles.TextStyle}> Login Using Facebook </Text> 
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.GooglePlusStyle} activeOpacity={0.5}> 
+            <Image 
+              source={require('../../assets/google.jpeg')} 
+              style={styles.ImageIconStyle} 
+              /> 
+            <View style={styles.SeparatorLineGoogle} /> 
+            <Text style={styles.TextGoogle}> Login Using Google </Text> 
+          </TouchableOpacity>
+          
+          <View style = {styles.lineStyle} />
+
+          <Text style={styles.textSignUp}>
+            Do not have an account yet?
+          </Text>
+
+          <View style={styles.buttonSignUp}>
+            <Button
+              title="Sign Up"
+              color="#DF74A2"
+              onPress={() => this.props.navigation.navigate('Register')}
+            />
+          </View>
+        </View>        
+      </ScrollView>
     );
   }
 
@@ -127,17 +138,21 @@ export default class LoginPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    backgroundColor: '#d93078',
+    justifyContent: 'center',
+    backgroundColor: '#BF2A6B',
     alignItems: 'center',
-    paddingTop: 25,
+    paddingTop: StatusBar.currentHeight,
+    paddingBottom: 30,
   },
   logo: {
-    height: 150,
-    width: 150,
+    height: 200,
+    width: 200,
+    paddingTop: 10,
     borderRadius: 160,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  logmail: {
+  inputTxt: {
     height: 40,
     width: 250,
     padding: 10,
@@ -149,35 +164,55 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#BF2A6B',
   },
-  logpass: {
+  GooglePlusStyle: {
+    flexDirection: 'row',
+    width: 190,
+    alignItems: 'center',
+    backgroundColor: '#f7f7f7',
+    borderWidth: .5,
+    borderColor: '#fff',
     height: 40,
-    width: 250,
+    borderRadius: 10 ,
+    margin: 5,  
+  }, 
+  FacebookStyle: {
+    flexDirection: 'row',
+    width: 190,
+    alignItems: 'center',
+    backgroundColor: '#485a96',
+    borderWidth: .5,
+    borderColor: 'gray',
+    height: 40,
+    borderRadius: 10 ,
+    margin: 5,
+  
+  }, 
+  ImageIconStyle: {
     padding: 10,
-    marginTop: 20,
-    fontSize: 20,
-    textAlign: 'center',
-    borderBottomWidth: 1,
-    borderColor: 'white',
-    borderRadius: 10,
-    backgroundColor: '#BF2A6B',
+    margin: 5,
+    height: 25,
+    width: 25,
+    resizeMode : 'stretch', 
+  }, 
+  TextStyle :{ 
+    color: "#fff",
+    marginBottom : 4,
+    marginRight :20,  
   },
-  buttonGoo: {
-    height: 40,
-    width: 120,
-    marginTop: 5,
-    fontSize: 20,
-    textAlign: 'center',
-    borderRadius: 10,
-    backgroundColor: '#BF2A6B',
-  },
-  buttonFace: {
-    height: 40,
-    width: 120,
-    marginTop: 5,
-    fontSize: 20,
-    textAlign: 'center',
-    borderRadius: 10,
-    backgroundColor: '#BF2A6B',
+  TextGoogle :{ 
+    color: "gray",
+    marginBottom : 4,
+    marginRight :20,  
+  }, 
+  SeparatorLine :{ 
+    backgroundColor : '#fff',
+    width: 1,
+    height: 40 
+  }, 
+  SeparatorLineGoogle :{ 
+    backgroundColor : 'gray',
+    width: 1,
+    height: 40 
   },
   buttonLogin: {
     height: 40,
@@ -187,7 +222,7 @@ const styles = StyleSheet.create({
     marginLeft: 180,
     fontSize: 20,
     textAlign: 'center',
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: '#BF2A6B',
   },
   buttonSignUp: {
@@ -196,7 +231,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 20,
     textAlign: 'center',
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: '#BF2A6B',
   },
   lineStyle: {
@@ -204,12 +239,12 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor:'gray',
         margin:10,
-   },
+  },
   textSignUp: {
     marginTop: 8,
     fontSize: 15,
     textAlign: 'center',
-    backgroundColor: '#d93078',
+    backgroundColor: '#BF2A6B',
     color: 'white'
   },
   error:{

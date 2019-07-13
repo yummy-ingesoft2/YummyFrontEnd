@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    backgroundColor: '#d93078',
+    backgroundColor: '#BF2A6B',
     alignItems: 'center',
     paddingTop: 25,
   },
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     textAlign: 'center',
-    backgroundColor: '#d93078',
+    backgroundColor: '#BF2A6B',
     color: 'white'
   },
   paragraph: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 20,
     textAlign: 'center',
-    backgroundColor: '#d93078',
+    backgroundColor: '#BF2A6B',
     color: 'white',
   }
 });

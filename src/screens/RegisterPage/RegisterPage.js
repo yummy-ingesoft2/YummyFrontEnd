@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Text, TextInput, View, StyleSheet, Image, Button } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
 import { Constants } from 'expo';
 
 export default class RegisterPage extends Component {
@@ -156,71 +156,102 @@ export default class RegisterPage extends Component {
   }
   render(){
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={[styles.logmail, !this.state.nameValidate? styles.error:null]}
-          placeholder="Nombre"
-          onChangeText={(text) => this.validate(text, 'name')}
-        />
-        <TextInput
-          style={[styles.logmail, !this.state.lastnameValidate? styles.error:null]}
-          placeholder="Apellido"
-          onChangeText={(text) => this.validate(text, 'lastname')}
-        />
-        <TextInput
-          style={styles.logmail}
-          type="date"
-          placeholder="Fecha de nacimiento"
-          onChangeText={(text) => this.validate({text})}
-        />
-        <TextInput
-          style={[styles.logmail, !this.state.emailValidate? styles.error:null]}
-          type="email"
-          placeholder="Email"
-          onChangeText={(text) => this.validate(text, 'email')}
-        />
-        <TextInput
-          style={[styles.logmail, !this.state.phoneValidate? styles.error:null]}
-          placeholder="Teléfono"
-          onChangeText={(text) => this.validate(text, 'phone')}
-        />
-        <TextInput
-          style={[styles.logpass, !this.state.passwordValidate? styles.error:null]}
-          type="password"
-          placeholder="Contraseña"
-          secureTextEntry={true}
-          onChangeText={(text) => this.validate(text, 'password')}
-        />
-        <TextInput
-          style={[styles.logpass, !this.state.confirmPasswordValidate? styles.error:null]}
-          type="password"
-          placeholder="Confirmar Contraseña"
-          secureTextEntry={true}
-          onChangeText={(text) => this.validate(text, 'confirmPassword')}
-        />
-        <View style = {styles.lineStyle} />
-        <View style={styles.buttonSignUp}>
-          <Button
-            disabled={this.confirm()}
-            title="Registrar"
-            color="#DF74A2"
-            onPress={() => this.props.navigation.navigate('TabNavigator')}
-        />
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={styles.container}>
+          <Text style={styles.text}>
+            Signing Up !
+          </Text>
+          <TextInput
+            style={[styles.inputTxt, !this.state.nameValidate? styles.error:null]}
+            placeholder="Name"
+            onChangeText={(text) => this.validate(text, 'name')}
+          />
+          <TextInput
+            style={[styles.inputTxt, !this.state.lastnameValidate? styles.error:null]}
+            placeholder="Last Name"
+            onChangeText={(text) => this.validate(text, 'lastname')}
+          />
+          <TextInput
+            style={styles.inputTxt}
+            type="date"
+            placeholder="Birth Date"
+            onChangeText={(text) => this.validate({text})}
+          />
+          <TextInput
+            style={[styles.inputTxt, !this.state.emailValidate? styles.error:null]}
+            type="email"
+            placeholder="Email"
+            onChangeText={(text) => this.validate(text, 'email')}
+          />
+          <TextInput
+            style={[styles.inputTxt, !this.state.phoneValidate? styles.error:null]}
+            placeholder="Phone"
+            onChangeText={(text) => this.validate(text, 'phone')}
+          />
+          <TextInput
+            style={[styles.inputTxt, !this.state.passwordValidate? styles.error:null]}
+            type="password"
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={(text) => this.validate(text, 'password')}
+          />
+          <TextInput
+            style={[styles.inputTxt, !this.state.confirmPasswordValidate? styles.error:null]}
+            type="password"
+            placeholder="Confirm Password"
+            secureTextEntry={true}
+            onChangeText={(text) => this.validate(text, 'confirmPassword')}
+          />
+          <View style = {styles.lineStyle} />
+
+          <View style={styles.buttonSignUp}>
+            <Button
+              disabled={this.confirm()}
+              title="Sign Up"
+              color="#DF74A2"
+              onPress={() => this.props.navigation.navigate('TabNavigator')}
+          />
+          </View>
+
+          <View>
+            <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5}> 
+              <Image 
+                source={require('../../assets/facebook.jpeg')} 
+                style={styles.ImageIconStyle} 
+              /> 
+              <View style={styles.SeparatorLine} /> 
+              <Text style={styles.TextStyle}> Sign Up Using Facebook </Text> 
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.GooglePlusStyle} activeOpacity={0.5}> 
+              <Image 
+                source={require('../../assets/google-plus.jpeg')} 
+                style={styles.ImageIconStyle} 
+                /> 
+              <View style={styles.SeparatorLine} /> 
+              <Text style={styles.TextStyle}> Sign Up Using Google </Text> 
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  scroll: {    
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    backgroundColor: '#d93078',
+    backgroundColor: 'white',
     alignItems: 'center',
     paddingTop: 25,
+    paddingBottom: 32,
   },
-  logmail: {
+  inputTxt: {
     height: 35,
     width: 250,
     padding: 10,
@@ -228,44 +259,68 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
     borderBottomWidth: 1,
-    borderColor: 'white',
+    borderColor: 'gray',
     borderRadius: 10,
-    backgroundColor: '#BF2A6B',
-  },
-  logpass: {
-    height: 35,
-    width: 250,
-    padding: 10,
-    marginTop: 20,
-    marginBottom: 15,
-    fontSize: 15,
-    textAlign: 'center',
-    borderBottomWidth: 1,
-    borderColor: 'white',
-    borderRadius: 10,
-    backgroundColor: '#BF2A6B',
+    backgroundColor: 'white',
   },
   buttonSignUp: {
     height: 40,
     width: 110,
-    marginTop: 5,
     fontSize: 20,
     textAlign: 'center',
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: '#BF2A6B',
+  },  
+  GooglePlusStyle: {
+    flexDirection: 'row',
+    width: 200,
+    alignItems: 'center',
+    backgroundColor: '#dc4e41',
+    borderWidth: .5,
+    borderColor: '#fff',
+    height: 40,
+    borderRadius: 10 ,
+    margin: 5,  
+  }, 
+  FacebookStyle: {
+    flexDirection: 'row',
+    width: 200,
+    alignItems: 'center',
+    backgroundColor: '#485a96',
+    borderWidth: .5,
+    borderColor: 'gray',
+    height: 40,
+    borderRadius: 10 ,
+    margin: 5,
+  
+  }, 
+  ImageIconStyle: {
+    padding: 10,
+    margin: 5,
+    height: 25,
+    width: 25,
+    resizeMode : 'stretch', 
+  }, 
+  TextStyle :{ 
+    color: "#fff",
+    marginBottom : 4,
+    marginRight :20,  
   },
+  SeparatorLine :{ 
+    backgroundColor : '#fff',
+    width: 1,
+    height: 40 
+  }, 
   lineStyle: {
-        width: 280,
+        width: 300,
         borderWidth: 0.5,
         borderColor:'gray',
-        margin:10,
+        margin:35,
    },
-  textSignUp: {
-    marginTop: 8,
-    fontSize: 15,
-    textAlign: 'center',
-    backgroundColor: '#d93078',
-    color: 'white'
+  text: {
+    marginTop: 30,
+    fontSize: 38,
+    color: 'black'
   },
   error:{
     borderWidth: 3,
