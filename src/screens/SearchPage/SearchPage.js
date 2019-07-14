@@ -7,6 +7,14 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 class SearchPage extends React.Component {
+
+  headerMode: 'none'
+  static navigationOptions = ({ navigation }) => {
+    return {
+       header: () => null
+    }
+  }
+  
   render(){
     return (
       <View style={styles.container}>

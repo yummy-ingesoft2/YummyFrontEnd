@@ -5,6 +5,13 @@ import { Constants } from 'expo';
 
 export default class LandingPage extends Component {
 
+  headerMode: 'none'
+  static navigationOptions = ({ navigation }) => {
+    return {
+       header: () => null
+    }
+  }
+  
   render(){
 
     return (

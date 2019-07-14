@@ -8,6 +8,14 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { Card } from 'react-native-paper';
 
 class HomePage extends React.Component {
+
+  headerMode: 'none'
+  static navigationOptions = ({ navigation }) => {
+    return {
+       header: () => null
+    }
+  }
+  
   render(){
     return (
       <ScrollView>
@@ -26,7 +34,8 @@ class HomePage extends React.Component {
 
           <Button
             title="Populares"
-            color="#DF74A2"
+            color="#DF74A2"            
+            onPress={() => this.props.navigation.navigate('Product')}
           />
 
           <Card style={styles.card}>

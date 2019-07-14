@@ -1,9 +1,29 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Text, TextInput, View, StyleSheet, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Image, Button, TouchableOpacity, ScrollView, PanResponder } from 'react-native';
 import { Constants } from 'expo';
+import DatePicker from 'react-native-datepicker';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+
+var radio_props = [
+  {label: 'Male', value: 0 },
+  {label: 'female', value: 1 }
+];
 
 export default class RegisterPage extends Component {
+  
+static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+
+    return {
+      title: params ? params.otherParam : '               Yummy!',
+      /* These values are used instead of the shared configuration! */
+      headerStyle: {
+        backgroundColor: "#d93078",
+      },
+      headerTintColor: "white",
+    };
+};
   constructor(props){
     super(props);
 
@@ -14,6 +34,7 @@ export default class RegisterPage extends Component {
       lastnameValidate: true,
       date: ' ',
       dateValidate: true,
+      value: 0,
       email: ' ',
       emailValidate: true,
       phone: ' ',
@@ -24,6 +45,17 @@ export default class RegisterPage extends Component {
       confirmPasswordValidate: true,
       confPassword: ' '
     };
+  }
+
+  componentWillMount() {
+    this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (e) => {console.log('onStartShouldSetPanResponder'); return true;},
+      onMoveShouldSetPanResponder: (e) => {console.log('onMoveShouldSetPanResponder'); return true;},
+      onPanResponderGrant: (e) => console.log('onPanResponderGrant'),
+      onPanResponderMove: (e) => console.log('onPanResponderMove'),
+      onPanResponderRelease: (e) => console.log('onPanResponderRelease'),
+      onPanResponderTerminate: (e) => console.log('onPanResponderTerminate')
+    });
   }
 
   confirm(){
@@ -161,54 +193,115 @@ export default class RegisterPage extends Component {
           <Text style={styles.text}>
             Signing Up !
           </Text>
-          <TextInput
-            style={[styles.inputTxt, !this.state.nameValidate? styles.error:null]}
-            placeholder="Name"
-            onChangeText={(text) => this.validate(text, 'name')}
-          />
-          <TextInput
-            style={[styles.inputTxt, !this.state.lastnameValidate? styles.error:null]}
-            placeholder="Last Name"
-            onChangeText={(text) => this.validate(text, 'lastname')}
-          />
-          <TextInput
-            style={styles.inputTxt}
-            type="date"
+          <View style={styles.sectionTextField}>
+            <TextInput
+              style={[styles.inputTxt, !this.state.nameValidate? styles.error:null]}
+              placeholder="Name"
+              onChangeText={(text) => this.validate(text, 'name')}
+            />
+            <Image 
+              style={styles.iconTxt} 
+              source={require('../../assets/userIcon.png')}
+            />
+          </View>
+
+          <View style={styles.sectionTextField}>
+            <TextInput
+              style={[styles.inputTxt, !this.state.lastnameValidate? styles.error:null]}
+              placeholder="Last Name"
+              onChangeText={(text) => this.validate(text, 'lastname')}
+            />
+            <Image 
+              style={styles.iconTxt} 
+              source={require('../../assets/userIcon.png')}
+            />              
+          </View>
+
+          <DatePicker
+            style={styles.datePicker}
+            date={this.state.date}
+            mode="date"
             placeholder="Birth Date"
-            onChangeText={(text) => this.validate({text})}
+            format="YYYY-MM-DD"
+            minDate="1945-01-01"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            iconSource={require('../../assets/calendarIcon.png')}
+            onDateChange={(date) => {this.setState({date: date});}}
           />
-          <TextInput
-            style={[styles.inputTxt, !this.state.emailValidate? styles.error:null]}
-            type="email"
-            placeholder="Email"
-            onChangeText={(text) => this.validate(text, 'email')}
+
+          <RadioForm
+            radio_props={radio_props}
+            initial={-1}
+            formHorizontal={true}
+            buttonColor = {'gray'}
+            selectedButtonColor = {'gray'}
+            buttonInnerSize = {10}
+            buttonOuterSize = {25}
+            animation={false}
+            onPress={(value) => {this.setState({value:value})}}
           />
-          <TextInput
-            style={[styles.inputTxt, !this.state.phoneValidate? styles.error:null]}
-            placeholder="Phone"
-            onChangeText={(text) => this.validate(text, 'phone')}
-          />
-          <TextInput
-            style={[styles.inputTxt, !this.state.passwordValidate? styles.error:null]}
-            type="password"
-            placeholder="Password"
-            secureTextEntry={true}
-            onChangeText={(text) => this.validate(text, 'password')}
-          />
-          <TextInput
-            style={[styles.inputTxt, !this.state.confirmPasswordValidate? styles.error:null]}
-            type="password"
-            placeholder="Confirm Password"
-            secureTextEntry={true}
-            onChangeText={(text) => this.validate(text, 'confirmPassword')}
-          />
+
+          <View style={styles.sectionTextField}>              
+            <TextInput
+              style={[styles.inputTxt, !this.state.emailValidate? styles.error:null]}
+              type="email"
+              placeholder="Email"
+              onChangeText={(text) => this.validate(text, 'email')}
+            />
+            <Image 
+              style={styles.iconTxt} 
+              source={require('../../assets/emailIcon.png')}
+            />
+          </View>
+
+          <View style={styles.sectionTextField}>          
+            <TextInput
+              style={[styles.inputTxt, !this.state.phoneValidate? styles.error:null]}
+              placeholder="Phone"
+              onChangeText={(text) => this.validate(text, 'phone')}
+            />
+            <Image 
+              style={styles.iconTxt} 
+              source={require('../../assets/phoneIcon.png')}
+            />    
+          </View>
+
+          <View style={styles.sectionTextField}>              
+            <TextInput
+              style={[styles.inputTxt, !this.state.passwordValidate? styles.error:null]}
+              type="password"
+              placeholder="Password"
+              secureTextEntry={true}
+              onChangeText={(text) => this.validate(text, 'password')}
+            />
+            <Image 
+              style={styles.iconTxt} 
+              source={require('../../assets/passwordIcon.png')}
+            />
+          </View>
+
+          <View style={styles.sectionTextField}>       
+            <TextInput
+              style={[styles.inputTxt, !this.state.confirmPasswordValidate? styles.error:null]}
+              type="password"
+              placeholder="Confirm Password"
+              secureTextEntry={true}
+              onChangeText={(text) => this.validate(text, 'confirmPassword')}
+            />
+            <Image 
+              style={styles.iconTxt} 
+              source={require('../../assets/passwordIcon.png')}
+            />       
+          </View>
+
           <View style = {styles.lineStyle} />
 
           <View style={styles.buttonSignUp}>
             <Button
               disabled={this.confirm()}
               title="Sign Up"
-              color="#DF74A2"
+              color="#BF2A6B"
               onPress={() => this.props.navigation.navigate('TabNavigator')}
           />
           </View>
@@ -243,24 +336,45 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  datePicker: {
+    borderRadius: 10,
+    borderColor: 'gray',
+    marginTop: 20, 
+    marginBottom: 20, 
+    width: 200,
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     backgroundColor: 'white',
     alignItems: 'center',
-    paddingTop: 25,
+    paddingTop: 15,
     paddingBottom: 32,
   },
-  inputTxt: {
-    height: 35,
-    width: 250,
-    padding: 10,
-    marginTop: 20,
-    fontSize: 15,
-    textAlign: 'center',
+  sectionTextField: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderColor: 'gray',
-    borderRadius: 10,
+    height: 40,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  iconTxt: {
+    padding: 10,
+    margin: 5,
+    height: 25,
+    width: 25,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+  },
+  inputTxt: {
+    height: 40,
+    width: 250,
+    fontSize: 15,
+    textAlign: 'center',
     backgroundColor: 'white',
   },
   buttonSignUp: {
@@ -268,7 +382,6 @@ const styles = StyleSheet.create({
     width: 110,
     fontSize: 20,
     textAlign: 'center',
-    borderRadius: 10,
     backgroundColor: '#BF2A6B',
   },  
   GooglePlusStyle: {
@@ -312,18 +425,18 @@ const styles = StyleSheet.create({
     height: 40 
   }, 
   lineStyle: {
-        width: 300,
-        borderWidth: 0.5,
-        borderColor:'gray',
-        margin:35,
+    width: 300,
+    borderWidth: 0.5,
+    borderColor:'gray',
+    margin:35,
    },
   text: {
-    marginTop: 30,
+    marginTop: 10,
     fontSize: 38,
     color: 'black'
   },
   error:{
-    borderWidth: 3,
+    borderBottomWidth: 3,
     borderColor: 'red'
   }
 });

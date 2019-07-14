@@ -4,6 +4,14 @@ import { Text, TextInput, View, StyleSheet, Image, Button, ScrollView, Touchable
 import { Constants } from 'expo';
 
 export default class LoginPage extends Component {
+
+  headerMode: 'none'
+  static navigationOptions = ({ navigation }) => {
+    return {
+       header: () => null
+    }
+  }
+  
   constructor(props){
       super(props);
 
@@ -92,6 +100,7 @@ export default class LoginPage extends Component {
             <Button
               title="Login"
               color="#DF74A2"
+              activeOpacity={0.5}
               disabled={this.confirmValidaciones()}
               onPress={() => this.props.navigation.navigate('TabNavigator')}
             />
@@ -158,6 +167,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 20,
     fontSize: 20,
+    color: 'white',
     textAlign: 'center',
     borderBottomWidth: 1,
     borderColor: 'white',

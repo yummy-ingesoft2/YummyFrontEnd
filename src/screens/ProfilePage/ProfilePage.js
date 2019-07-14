@@ -7,6 +7,14 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { Card } from 'react-native-paper';
 
 class ProfilePage extends React.Component {
+
+  headerMode: 'none'
+  static navigationOptions = ({ navigation }) => {
+    return {
+       header: () => null
+    }
+  }
+  
   render(){
     return (
       <ScrollView>
