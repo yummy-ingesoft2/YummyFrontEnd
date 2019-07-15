@@ -10,7 +10,7 @@ import { createLogger } from 'redux-logger'
 import reducers from './src/redux/reducers'
 import thunk from 'redux-thunk';
 //app views and components
-import App from './src';
+import App from './App';
 
 const loggerMiddleware = createLogger({ predicate: () => false })
 const persistedReducer = persistReducer({ key: 'root', storage, blacklist: ['filter', 'modals'] }, reducers)

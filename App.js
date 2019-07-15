@@ -5,17 +5,25 @@ import LoginPage from './src/screens/LoginPage/LoginPage';
 import RegisterPage from './src/screens/RegisterPage/RegisterPage';
 import ProductPage from './src/screens/ProductPage/ProductPage';
 import createBottomTabNavigator from './src/TabNavigator';
+import { connect } from 'react-redux';
+import * as actions from './src/redux/actions'
 
 const AppNavigator = createStackNavigator({
-  Landing: { screen: LandingPage },
-  Login: { screen: LoginPage },
-  Register: { screen: RegisterPage },
-  Product: { screen: ProductPage },
-  TabNavigator: { screen: createBottomTabNavigator }
-},
-{
-    initialRouteName: 'Login'
+    Landing: { screen: LandingPage },
+    Login: { screen: LoginPage },
+    Register: { screen: RegisterPage },
+    Product: { screen: ProductPage },
+    TabNavigator: { screen: createBottomTabNavigator }
+  },
+  {
+    initialRouteName: 'Landing'
   }
 )
 
-export default createAppContainer(AppNavigator)
+function mapStateToProps(state){
+  return {
+    user : state.session && state.session.user ? state.session.user : false
+  }
+}
+
+export default connect(mapStateToProps)(createAppContainer(AppNavigator));

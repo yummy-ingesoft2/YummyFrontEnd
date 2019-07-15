@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\juanc\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-navigation
+  C:\Program Files\nodejs\node.exe C:\Users\juanc\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add redux
 
 PATH: 
-  C:\Users\juanc\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\juanc\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Go\bin;C:\Users\juanc\OneDrive\Documentos\apache-maven-3.6.1\bin;C:\Users\juanc\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Ruby26-x64\bin;C:\Users\juanc\AppData\Local\Microsoft\WindowsApps;C:\Users\juanc\go\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2019.1.1\bin;C:\Users\juanc\AppData\Roaming\npm;C:\Users\juanc\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  C:\Users\juanc\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\juanc\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Users\juanc\OneDrive\Documentos\apache-maven-3.6.1\bin;C:\Users\juanc\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Ruby26-x64\bin;C:\Users\juanc\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\PyCharm Community Edition 2019.1.1\bin;C:\Users\juanc\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\juanc\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.16.0
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/lottie-react-native/-/lottie-react-native-2.5.0.tgz: ESOCKETTIMEDOUT
+  Error: https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.25.0.tgz: ESOCKETTIMEDOUT
       at ClientRequest.<anonymous> (C:\Users\juanc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:130217:19)
       at Object.onceWrapper (events.js:286:20)
       at ClientRequest.emit (events.js:198:13)
@@ -41,12 +41,25 @@ npm manifest:
       "expo": "^32.0.0",
       "link": "^0.1.5",
       "node": "^12.4.0",
-      "react": "^16.5.0",
+      "react": "^16.8.6",
       "react-dom": "^16.8.6",
       "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+      "react-native-datepicker": "^1.7.2",
+      "react-native-maps": "^0.25.0",
+      "react-native-paper": "^2.16.0",
+      "react-native-simple-radio-button": "^2.7.3",
+      "react-native-tab-navigator": "^0.3.4",
+      "react-native-vector-icons": "^6.6.0",
       "react-navigation": "^3.11.0",
+      "react-navigation-stack": "^1.4.0",
+      "react-redux": "^5.0.1",
       "react-router-dom": "^5.0.0",
       "reactstrap": "^8.0.0",
+      "redux": "^4.0.4",
+      "redux-axios-middleware": "^4.0.1",
+      "redux-logger": "^3.0.6",
+      "redux-persist": "^5.10.0",
+      "redux-thunk": "^2.3.0",
       "sharp": "^0.22.1"
     },
     "devDependencies": {

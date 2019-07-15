@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Text, TextInput, View, StyleSheet, Image, Button, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { Alert,Text, TextInput, View, StyleSheet, Image, Button, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { Constants } from 'expo';
 
-export default class LoginPage extends Component {
+import { connect } from 'react-redux';
+import { login } from '../../redux/actions';
+
+class LoginPage extends Component {
 
   headerMode: 'none'
   static navigationOptions = ({ navigation }) => {
@@ -11,7 +14,18 @@ export default class LoginPage extends Component {
        header: () => null
     }
   }
-  
+
+  _login(){
+        this.props.login(this.state).then(($result) => {
+            //todo salio bien enviamos a otra vista donde veremos el perfild del usuario
+            Alert.alert('session iniciada',JSON.stringify(this.props.session));
+            this.props.navigation.navigate('TabNavigator')
+        }).catch( (err) => {
+            Alert.alert('Error',err.message);
+        })
+
+    }
+
   constructor(props){
       super(props);
 
@@ -102,28 +116,29 @@ export default class LoginPage extends Component {
               color="#DF74A2"
               activeOpacity={0.5}
               disabled={this.confirmValidaciones()}
-              onPress={() => this.props.navigation.navigate('TabNavigator')}
+
+              onPress={() => this._login()}
             />
           </View>
 
-          <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5}> 
-            <Image 
-              source={require('../../assets/facebook.jpeg')} 
-              style={styles.ImageIconStyle} 
-            /> 
-            <View style={styles.SeparatorLine} /> 
-            <Text style={styles.TextStyle}> Login Using Facebook </Text> 
+          <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5}>
+            <Image
+              source={require('../../assets/facebook.jpeg')}
+              style={styles.ImageIconStyle}
+            />
+            <View style={styles.SeparatorLine} />
+            <Text style={styles.TextStyle}> Login Using Facebook </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.GooglePlusStyle} activeOpacity={0.5}> 
-            <Image 
-              source={require('../../assets/google.jpeg')} 
-              style={styles.ImageIconStyle} 
-              /> 
-            <View style={styles.SeparatorLineGoogle} /> 
-            <Text style={styles.TextGoogle}> Login Using Google </Text> 
+          <TouchableOpacity style={styles.GooglePlusStyle} activeOpacity={0.5}>
+            <Image
+              source={require('../../assets/google.jpeg')}
+              style={styles.ImageIconStyle}
+              />
+            <View style={styles.SeparatorLineGoogle} />
+            <Text style={styles.TextGoogle}> Login Using Google </Text>
           </TouchableOpacity>
-          
+
           <View style = {styles.lineStyle} />
 
           <Text style={styles.textSignUp}>
@@ -137,7 +152,7 @@ export default class LoginPage extends Component {
               onPress={() => this.props.navigation.navigate('Register')}
             />
           </View>
-        </View>        
+        </View>
       </ScrollView>
     );
   }
@@ -183,8 +198,8 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     height: 40,
     borderRadius: 10 ,
-    margin: 5,  
-  }, 
+    margin: 5,
+  },
   FacebookStyle: {
     flexDirection: 'row',
     width: 190,
@@ -195,34 +210,34 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10 ,
     margin: 5,
-  
-  }, 
+
+  },
   ImageIconStyle: {
     padding: 10,
     margin: 5,
     height: 25,
     width: 25,
-    resizeMode : 'stretch', 
-  }, 
-  TextStyle :{ 
+    resizeMode : 'stretch',
+  },
+  TextStyle :{
     color: "#fff",
     marginBottom : 4,
-    marginRight :20,  
+    marginRight :20,
   },
-  TextGoogle :{ 
+  TextGoogle :{
     color: "gray",
     marginBottom : 4,
-    marginRight :20,  
-  }, 
-  SeparatorLine :{ 
+    marginRight :20,
+  },
+  SeparatorLine :{
     backgroundColor : '#fff',
     width: 1,
-    height: 40 
-  }, 
-  SeparatorLineGoogle :{ 
+    height: 40
+  },
+  SeparatorLineGoogle :{
     backgroundColor : 'gray',
     width: 1,
-    height: 40 
+    height: 40
   },
   buttonLogin: {
     height: 40,
@@ -262,3 +277,11 @@ const styles = StyleSheet.create({
     borderColor: 'red'
   }
 });
+
+function MapStateToProps(state){
+    return {
+        user : state.session && state.session.user ? state.session.user : false
+    }
+}
+
+export default connect(MapStateToProps,{  login })(LoginPage);
