@@ -1,18 +1,21 @@
 import axios from 'axios';
 
+//let API = "http://ce4fa94f.ngrok.io/"
 let API = "http://yummyback.herokuapp.com/"
 let API_LOGIN = `${API}client_token`;
-
+let API_REGISTER = '';
 import {
     SET_SESSION
 } from '../ActionTypes';
 
-export const login = ({ email, password }) => (dispatch, getState) => {
+export const login = ( email, password ) => (dispatch, getState) => {
     return new Promise((resolve, reject) => {
-        axios.post(API_LOGIN,{
-                email,
-                password
-            })
+        axios.post(API_LOGIN, {
+              auth:{
+                  email: email,
+                  password: password
+              }
+          } )
             .then((respJson) => {
                 //si todo sale bien guardamos el user y token en localstore
                 dispatch({
