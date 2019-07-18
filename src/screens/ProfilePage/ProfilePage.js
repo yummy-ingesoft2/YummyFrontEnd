@@ -88,7 +88,8 @@ class ProfilePage extends React.Component {
           </View>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} activeOpacity={0.5}> 
+            <TouchableOpacity style={styles.button} activeOpacity={0.5}
+              onPress={() => this.props.navigation.navigate('AddProduct')}> 
               <Image 
                 source={require('../../assets/upIcon.png')} 
                 style={styles.iconButton} 

@@ -4,6 +4,8 @@ import LandingPage from './screens/LandingPage/LandingPage';
 import LoginPage from './screens/LoginPage/LoginPage';
 import RegisterPage from './screens/RegisterPage/RegisterPage';
 import ProductPage from './screens/ProductPage/ProductPage';
+import Reviews from './screens/ProductPage/Reviews';
+import AddProduct from './screens/ProductPage/AddProduct';
 import createBottomTabNavigator from './TabNavigator';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions'
@@ -13,6 +15,8 @@ const AppNavigator = createStackNavigator({
     Login: { screen: LoginPage },
     Register: { screen: RegisterPage },
     Product: { screen: ProductPage },
+    Reviews: { screen: Reviews },
+    AddProduct: { screen: AddProduct },
     TabNavigator: { screen: createBottomTabNavigator,
                     navigationOptions: {
                         header: null,

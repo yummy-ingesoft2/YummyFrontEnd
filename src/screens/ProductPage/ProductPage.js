@@ -54,9 +54,9 @@ render(){
 	              style={styles.iconTxt} 
 	              source={require('../../assets/chefIcon.png')}
 	            />
-		        <Text style={styles.paragraph}>
-		           Danna Bannana
-		        </Text>
+  		        <Text style={styles.paragraph}>
+  		           Danna Bannana
+  		        </Text>
           	</View>
 
           	<View style={styles.sectionTextField}>
@@ -64,9 +64,9 @@ render(){
 	              style={styles.iconTxt} 
 	              source={require('../../assets/starIcon.png')}
 	            />
-		        <Text style={styles.paragraph}>
-		           8.6
-		        </Text>
+  		        <Text style={styles.paragraph}>
+  		           4.3
+  		        </Text>
           	</View>
 
 	        <MapView
@@ -104,12 +104,13 @@ render(){
               <Text style={styles.TextStyle}> Buy Product </Text> 
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button2} activeOpacity={0.5}> 
+            <TouchableOpacity style={styles.button2} activeOpacity={0.5} 
+              onPress={() => this.props.navigation.navigate('Reviews')}> 
               <Image 
                 source={require('../../assets/statisticIcon.png')} 
                 style={styles.iconButton} 
               /> 
-              <Text style={styles.TextStyle}> Statistics </Text> 
+              <Text style={styles.TextStyle}> Reviews </Text> 
             </TouchableOpacity>
           </View>
 
