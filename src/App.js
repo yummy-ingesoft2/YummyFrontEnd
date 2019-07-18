@@ -13,7 +13,11 @@ const AppNavigator = createStackNavigator({
     Login: { screen: LoginPage },
     Register: { screen: RegisterPage },
     Product: { screen: ProductPage },
-    TabNavigator: { screen: createBottomTabNavigator }
+    TabNavigator: { screen: createBottomTabNavigator,
+                    navigationOptions: {
+                        header: null,
+                    } 
+                  }
   },
   {
     initialRouteName: 'Login'
