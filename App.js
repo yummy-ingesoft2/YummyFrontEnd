@@ -1,35 +1,41 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { AsyncStorage } from 'react-native';
-import LandingPage from './src/screens/LandingPage/LandingPage';
-import LoginPage from './src/screens/LoginPage/LoginPage';
-import RegisterPage from './src/screens/RegisterPage/RegisterPage';
-import RegisterPage2 from './src/screens/RegisterPage/RegisterPage2';
-import ProductPage from './src/screens/ProductPage/ProductPage';
-import createBottomTabNavigator from './src/TabNavigator';
-import { connect } from 'react-redux';
-import * as actions from './src/redux/actions'
+import React, { Component } from 'react'
+import { AppRegistry } from 'react-native';
+/*redux configuration*/
+import { applyMiddleware, compose, createStore } from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
+import { createLogger } from 'redux-logger'
+import reducers from './src/redux/reducers'
+import thunk from 'redux-thunk';
+//app views and components
+import APPP from './src/App';
 
-const AppNavigator = createStackNavigator({
-    Landing: { screen: LandingPage },
-    Login: { screen: LoginPage },
-    Register: { screen: RegisterPage },
-    Register2: { screen: RegisterPage2 },
-    Product: { screen: ProductPage },
-    TabNavigator: { screen: createBottomTabNavigator,
-                    navigationOptions: {
-                        header: null,
-                    } 
-                  }
-  },
-  {
-    initialRouteName: 'Login'
-  }
-)
+const loggerMiddleware = createLogger({ predicate: () => false })
+const persistedReducer = persistReducer({ key: 'root', storage, blacklist: ['filter', 'modals'] }, reducers)
 
-function mapStateToProps(state){
-  return {
-    user : state.session && state.session.user ? state.session.user : false
-  }
+function configureStore (initialState) {
+  const enhancer = compose(
+    applyMiddleware(thunk, loggerMiddleware)
+  )
+  return createStore(persistedReducer, initialState, enhancer)
 }
 
-export default connect(mapStateToProps)(createAppContainer(AppNavigator));
+const initialState = {}
+export const store = configureStore(initialState)
+export const persistor = persistStore(store)
+
+export default class Herelodin extends Component {
+    render () {
+        return (
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <APPP />
+                </PersistGate>
+            </Provider>
+        )
+    }
+}
+
+AppRegistry.registerComponent('herelodin', () => Herelodin);

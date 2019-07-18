@@ -11,7 +11,7 @@ var radio_props = [
 ];
 
 export default class RegisterPage extends Component {
-  
+
 static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
 
@@ -153,7 +153,7 @@ static navigationOptions = ({ navigation }) => {
       this.setState({
         password:text,
       })
-      if(text.length >= 8)
+      if(text.length >= 6)
       {
         this.state.confPassword = text
         this.setState({
@@ -199,8 +199,8 @@ static navigationOptions = ({ navigation }) => {
               placeholder="Name"
               onChangeText={(text) => this.validate(text, 'name')}
             />
-            <Image 
-              style={styles.iconTxt} 
+            <Image
+              style={styles.iconTxt}
               source={require('../../assets/userIcon.png')}
             />
           </View>
@@ -211,10 +211,10 @@ static navigationOptions = ({ navigation }) => {
               placeholder="Last Name"
               onChangeText={(text) => this.validate(text, 'lastname')}
             />
-            <Image 
-              style={styles.iconTxt} 
+            <Image
+              style={styles.iconTxt}
               source={require('../../assets/userIcon.png')}
-            />              
+            />
           </View>
 
           <DatePicker
@@ -242,32 +242,32 @@ static navigationOptions = ({ navigation }) => {
             onPress={(value) => {this.setState({value:value})}}
           />
 
-          <View style={styles.sectionTextField}>              
+          <View style={styles.sectionTextField}>
             <TextInput
               style={[styles.inputTxt, !this.state.emailValidate? styles.error:null]}
               type="email"
               placeholder="Email"
               onChangeText={(text) => this.validate(text, 'email')}
             />
-            <Image 
-              style={styles.iconTxt} 
+            <Image
+              style={styles.iconTxt}
               source={require('../../assets/emailIcon.png')}
             />
           </View>
 
-          <View style={styles.sectionTextField}>          
+          <View style={styles.sectionTextField}>
             <TextInput
               style={[styles.inputTxt, !this.state.phoneValidate? styles.error:null]}
               placeholder="Phone"
               onChangeText={(text) => this.validate(text, 'phone')}
             />
-            <Image 
-              style={styles.iconTxt} 
+            <Image
+              style={styles.iconTxt}
               source={require('../../assets/phoneIcon.png')}
-            />    
+            />
           </View>
 
-          <View style={styles.sectionTextField}>              
+          <View style={styles.sectionTextField}>
             <TextInput
               style={[styles.inputTxt, !this.state.passwordValidate? styles.error:null]}
               type="password"
@@ -275,13 +275,13 @@ static navigationOptions = ({ navigation }) => {
               secureTextEntry={true}
               onChangeText={(text) => this.validate(text, 'password')}
             />
-            <Image 
-              style={styles.iconTxt} 
+            <Image
+              style={styles.iconTxt}
               source={require('../../assets/passwordIcon.png')}
             />
           </View>
 
-          <View style={styles.sectionTextField}>       
+          <View style={styles.sectionTextField}>
             <TextInput
               style={[styles.inputTxt, !this.state.confirmPasswordValidate? styles.error:null]}
               type="password"
@@ -289,10 +289,10 @@ static navigationOptions = ({ navigation }) => {
               secureTextEntry={true}
               onChangeText={(text) => this.validate(text, 'confirmPassword')}
             />
-            <Image 
-              style={styles.iconTxt} 
+            <Image
+              style={styles.iconTxt}
               source={require('../../assets/passwordIcon.png')}
-            />       
+            />
           </View>
 
           <View style = {styles.lineStyle} />
@@ -307,22 +307,22 @@ static navigationOptions = ({ navigation }) => {
           </View>
 
           <View>
-            <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5}> 
-              <Image 
-                source={require('../../assets/facebook.jpeg')} 
-                style={styles.ImageIconStyle} 
-              /> 
-              <View style={styles.SeparatorLine} /> 
-              <Text style={styles.TextStyle}> Sign Up Using Facebook </Text> 
+            <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5}>
+              <Image
+                source={require('../../assets/facebook.jpeg')}
+                style={styles.ImageIconStyle}
+              />
+              <View style={styles.SeparatorLine} />
+              <Text style={styles.TextStyle}> Sign Up Using Facebook </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.GooglePlusStyle} activeOpacity={0.5}> 
-              <Image 
-                source={require('../../assets/google-plus.jpeg')} 
-                style={styles.ImageIconStyle} 
-                /> 
-              <View style={styles.SeparatorLine} /> 
-              <Text style={styles.TextStyle}> Sign Up Using Google </Text> 
+            <TouchableOpacity style={styles.GooglePlusStyle} activeOpacity={0.5}>
+              <Image
+                source={require('../../assets/google-plus.jpeg')}
+                style={styles.ImageIconStyle}
+                />
+              <View style={styles.SeparatorLine} />
+              <Text style={styles.TextStyle}> Sign Up Using Google </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -332,15 +332,15 @@ static navigationOptions = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  scroll: {    
+  scroll: {
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   datePicker: {
     borderRadius: 10,
     borderColor: 'gray',
-    marginTop: 20, 
-    marginBottom: 20, 
+    marginTop: 20,
+    marginBottom: 20,
     width: 200,
   },
   container: {
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#BF2A6B',
     marginBottom: 10,
-  },  
+  },
   GooglePlusStyle: {
     flexDirection: 'row',
     width: 200,
@@ -394,8 +394,8 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     height: 40,
     borderRadius: 10 ,
-    margin: 5,  
-  }, 
+    margin: 5,
+  },
   FacebookStyle: {
     flexDirection: 'row',
     width: 200,
@@ -406,25 +406,25 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10 ,
     margin: 5,
-  
-  }, 
+
+  },
   ImageIconStyle: {
     padding: 10,
     margin: 5,
     height: 25,
     width: 25,
-    resizeMode : 'stretch', 
-  }, 
-  TextStyle :{ 
+    resizeMode : 'stretch',
+  },
+  TextStyle :{
     color: "#fff",
     marginBottom : 4,
-    marginRight :20,  
+    marginRight :20,
   },
-  SeparatorLine :{ 
+  SeparatorLine :{
     backgroundColor : '#fff',
     width: 1,
-    height: 40 
-  }, 
+    height: 40
+  },
   lineStyle: {
     width: 300,
     borderWidth: 0.5,

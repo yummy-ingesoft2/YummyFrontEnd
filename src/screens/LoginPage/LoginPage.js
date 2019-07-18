@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Alert,Text, TextInput, View, StyleSheet, Image, Button, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Image, Button, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { Constants } from 'expo';
 
 import { connect } from 'react-redux';
@@ -18,12 +18,11 @@ class LoginPage extends Component {
   _login(){
         this.props.login(this.state.email, this.state.password).then(($result) => {
             //todo salio bien enviamos a otra vista donde veremos el perfild del usuario
-            alert('session iniciada',JSON.stringify(this.props.session));
+            alert("sesion iniciada");//JSON.stringify(this.props.session.token));
             this.props.navigation.navigate('TabNavigator')
         }).catch( (err) => {
-            alert('Error',err.message);
+            alert(err.message);
         })
-
     }
 
   constructor(props){
@@ -60,6 +59,7 @@ class LoginPage extends Component {
         if(alph.test(text))
         {
           this.setState({
+            email: (text).toLowerCase(),
             emailValidate:true,
           })
         }
@@ -78,6 +78,7 @@ class LoginPage extends Component {
         if(text.length >= 6)
         {
           this.setState({
+            password: text,
             passwordValidate:true,
           })
         }
