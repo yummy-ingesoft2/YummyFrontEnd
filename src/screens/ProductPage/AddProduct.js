@@ -3,7 +3,6 @@ import { Component } from 'react';
 import { Text, TextInput, View, StyleSheet, Image, Button, ScrollView, TouchableOpacity } from 'react-native';
 import { Constants } from 'expo';
 import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
-import ImagePicker from 'react-native-image-picker';
 
 const categories = [
   {
@@ -12,7 +11,7 @@ const categories = [
   },
   {
     label: 'Desserts',
-    value: 'dessert',  
+    value: 'dessert',
   },
   {
     label: 'Vegetarian',
@@ -36,7 +35,6 @@ static navigationOptions = ({ navigation }) => {
 
 constructor (props) {
     super(props)
-<<<<<<< HEAD
     this.inputRefs = {
       category: null,
     };
@@ -46,46 +44,27 @@ constructor (props) {
     	category: null,
     	description: null,
     	cost: null,
-=======
-    this.state = {
-    	photo: null,
->>>>>>> 908d9ef1647cf235edff966d60693b18904f895c
     }
  }
 
-handleChoosePhoto = () => {
-    const options = {
-      noData: true,
-    };
-    ImagePicker.launchImageLibrary(options, response => {
-      if (response.uri) {
-        this.setState({ photo: response });
-      }
-    });
-};
-
 render(){
-<<<<<<< HEAD
     const placeholder = {
       label: 'Select a category...',
       value: null,
       color: '#9EA0A4',
       fontSize: 20,
     };
-=======
->>>>>>> 908d9ef1647cf235edff966d60693b18904f895c
 	const { photo } = this.state;
     return (
     	<ScrollView>
 	      <View style={styles.container}>
-<<<<<<< HEAD
 	       	<Text style={styles.title}>
 	          If you are a excellent cook with a incredible recipe just tell us and sell it on yummy!
 	        </Text>
 
           	<View style = {styles.lineStyle} />
 
-          	<TextInput 
+          	<TextInput
           	  style={styles.inputTxt}
               type="name"
               placeholder="Name of your recipe..."
@@ -108,87 +87,31 @@ render(){
 	            />
 	        </View>
 
-          	<TextInput 
+          	<TextInput
           	  style={styles.inputTxt2}
               type="description"
               placeholder="Add a description of your recipe..."
               onChangeText={(text) => this.setState({description: text})}
          	/>
 
-         	<TextInput 
+         	<TextInput
           	  style={styles.inputTxt}
               type="cost"
               placeholder="Tell us a price..."
               onChangeText={(text) => this.setState({cost: text})}
          	/>
-
-=======
-	        <Image style={styles.photo} source={require('../../assets/pincho.jpg')} />
->>>>>>> 908d9ef1647cf235edff966d60693b18904f895c
 	        {photo && (
 	          <Image
 	            source={{ uri: photo.uri }}
 	            style={{ width: 300, height: 300 }}
 	          />
 	        )}
-	        <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
-<<<<<<< HEAD
-
-	        <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} activeOpacity={0.5}>  
-              <Text style={styles.TextButton}> Add Product </Text> 
-            </TouchableOpacity>
-            </View>
-=======
-	      	<Text style={styles.title}>
-	          Vegetables Stick
-	        </Text>
-
-          	<View style = {styles.lineStyle} />
-
-          	<View style={styles.sectionTextField}>
-	            <Image
-	              style={styles.iconTxt}
-	              source={require('../../assets/chefIcon.png')}
-	            />
-		        <Text style={styles.paragraph}>
-		           Danna Bannana
-		        </Text>
-          	</View>
-
-          	<View style={styles.sectionTextField}>
-	            <Image
-	              style={styles.iconTxt}
-	              source={require('../../assets/starIcon.png')}
-	            />
-		        <Text style={styles.paragraph}>
-		           8.6
-		        </Text>
-          	</View>
-
-          <Text style={styles.paragraph}>
-              Price: $10.00
-          </Text>
-
+	        <Button title="Choose Photo"/>
 	        <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} activeOpacity={0.5}>
-              <Image
-                source={require('../../assets/buyIcon.png')}
-                style={styles.iconButton}
-              />
-              <Text style={styles.TextStyle}> Buy Product </Text>
+              <Text style={styles.TextButton}> Add Product </Text>
             </TouchableOpacity>
-
-            <TouchableOpacity style={styles.button2} activeOpacity={0.5}>
-              <Image
-                source={require('../../assets/statisticIcon.png')}
-                style={styles.iconButton}
-              />
-              <Text style={styles.TextStyle}> Statistics </Text>
-            </TouchableOpacity>
-          </View>
-
->>>>>>> 908d9ef1647cf235edff966d60693b18904f895c
+            </View>
 	    </View>
     </ScrollView>
     );
@@ -196,16 +119,11 @@ render(){
 
 }
 
-<<<<<<< HEAD
-const styles = StyleSheet.create({	
-=======
 const styles = StyleSheet.create({
->>>>>>> 908d9ef1647cf235edff966d60693b18904f895c
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     backgroundColor: 'white',
-<<<<<<< HEAD
     padding: 20,
   },
   title: {
@@ -261,7 +179,7 @@ const styles = StyleSheet.create({
     color: 'black',
     paddingLeft: 10,
   },
-  button: {    
+  button: {
     height: 40,
     width: 132,
     marginTop: 10,
@@ -280,10 +198,3 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-
-=======
-    alignItems: 'center',
-    paddingTop: 25,
-  },
-});
->>>>>>> 908d9ef1647cf235edff966d60693b18904f895c
