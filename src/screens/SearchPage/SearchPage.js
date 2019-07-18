@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Text, View, StyleSheet, Image, Button } from 'react-native';
+import { Text, View, StyleSheet, Image, Button, StatusBar } from 'react-native';
 import Constants from 'expo-constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
@@ -19,7 +19,7 @@ class SearchPage extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.paragraph}>
+          <Text style={styles.headerText}>
             Yummy!
           </Text>
         </View>
@@ -35,17 +35,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    paddingTop: StatusBar.currentHeight,
   },
   header: {
-    height: 80,
+    height: 55,
     justifyContent: 'space-around',
     backgroundColor: '#d93078',
     textAlign: 'center',
   },
-  paragraph: {
-    marginTop: 30,
+  headerText: {
+    marginTop: 20,
     marginBottom: 20,
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: '#d93078',

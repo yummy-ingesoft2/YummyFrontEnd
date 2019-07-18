@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Text, View, StyleSheet, Image, Button, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Image, Button, TouchableHighlight, TouchableOpacity, StatusBar } from 'react-native';
 import Constants from 'expo-constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createAppContainer, ScrollView } from 'react-navigation';
@@ -9,12 +9,10 @@ import { Card } from 'react-native-paper';
 
 class HomePage extends React.Component {
 
-  headerMode: 'none'
-  static navigationOptions = ({ navigation }) => {
-    return {
-       header: () => null
+  static navigationOptions = {
+        header: null,
+        headerVisible: false,
     }
-  }
   
   render(){
     return (
@@ -66,17 +64,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    paddingTop: StatusBar.currentHeight,
   },
   header: {
-    height: 80,
+    height: 55,
     justifyContent: 'space-around',
     backgroundColor: '#d93078',
     textAlign: 'center',
   },
   paragraph: {
-    marginTop: 30,
+    marginTop: 20,
     marginBottom: 20,
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: '#d93078',

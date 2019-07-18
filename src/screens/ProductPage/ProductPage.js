@@ -91,6 +91,10 @@ render(){
 	          }
 	        </MapView>
 
+          <Text style={styles.paragraph}>
+              Price: $10.00
+          </Text>
+
 	        <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} activeOpacity={0.5}> 
               <Image 

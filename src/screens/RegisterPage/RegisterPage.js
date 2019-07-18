@@ -302,7 +302,7 @@ static navigationOptions = ({ navigation }) => {
               disabled={this.confirm()}
               title="Sign Up"
               color="#BF2A6B"
-              onPress={() => this.props.navigation.navigate('TabNavigator')}
+              onPress={() => this.props.navigation.navigate('Register2')}
           />
           </View>
 
@@ -383,6 +383,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     backgroundColor: '#BF2A6B',
+    marginBottom: 10,
   },  
   GooglePlusStyle: {
     flexDirection: 'row',
@@ -428,7 +429,8 @@ const styles = StyleSheet.create({
     width: 300,
     borderWidth: 0.5,
     borderColor:'gray',
-    margin:35,
+    marginTop:35,
+    marginBottom: 25,
    },
   text: {
     marginTop: 10,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Text, View, StyleSheet, Image, Button, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Image, Button, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import Constants from 'expo-constants';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
@@ -26,7 +26,7 @@ class ProfilePage extends React.Component {
           </View>
 
           <View>
-            <Image style={styles.image}
+            <Image style={styles.photo}
               source={require('../../assets/profileIcon.png')}
             />
           </View>
@@ -116,17 +116,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingBottom: 30,
+    paddingTop: StatusBar.currentHeight,
   },
   header: {
-    height: 80,
+    height: 55,
     justifyContent: 'space-around',
     backgroundColor: '#d93078',
     textAlign: 'center',
   },
   headerText: {
-    marginTop: 30,
+    marginTop: 20,
     marginBottom: 20,
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: '#d93078',
@@ -172,14 +173,15 @@ const styles = StyleSheet.create({
     marginBottom:25,
     marginLeft: 40,
   }, 
-  image: {
-    height: 200,
-    width: 200,
+  photo: {
+    height: 150,
+    width: 150,
     marginTop: 40,
-    marginLeft: 80,
+    marginLeft: 105,
     justifyContent: 'center',
     alignItems: 'center',
     opacity: 0.8, 
+    borderRadius: 100,
   },
   button: {    
     flexDirection: 'row',

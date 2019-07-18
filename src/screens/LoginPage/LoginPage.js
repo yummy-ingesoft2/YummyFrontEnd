@@ -16,12 +16,12 @@ class LoginPage extends Component {
   }
 
   _login(){
-        this.props.login(this.state).then(($result) => {
+        this.props.login(this.state.email, this.state.password).then(($result) => {
             //todo salio bien enviamos a otra vista donde veremos el perfild del usuario
-            Alert.alert('session iniciada',JSON.stringify(this.props.session));
+            alert('session iniciada',JSON.stringify(this.props.session));
             this.props.navigation.navigate('TabNavigator')
         }).catch( (err) => {
-            Alert.alert('Error',err.message);
+            alert('Error',err.message);
         })
 
     }
@@ -75,7 +75,7 @@ class LoginPage extends Component {
         this.setState({
           password:text,
         })
-        if(text.length >= 8)
+        if(text.length >= 6)
         {
           this.setState({
             passwordValidate:true,
