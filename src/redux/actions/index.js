@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-//let API = "http://ce4fa94f.ngrok.io/"
 let API = "http://yummyback.herokuapp.com/"
 let API_LOGIN = `${API}client_token`;
 let API_REGISTER = '';

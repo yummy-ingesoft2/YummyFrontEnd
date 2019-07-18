@@ -5,34 +5,38 @@ import { Constants } from 'expo';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
+import axios from 'axios';
 
 const cities = [
   {
     label: 'Bogota',
     value: 'bogota',
     region: {
+      id: 1,
       latitude: 4.710988599999999,
       longitude: -74.072092,
       latitudeDelta: 0.1,
       longitudeDelta: 0.1
     }
-    
+
   },
   {
     label: 'Medellin',
     value: 'medellin',
     region: {
+      id: 3,
       latitude: 6.2443382,
       longitude: -75.573553,
       latitudeDelta: 0.1,
       longitudeDelta: 0.1
-    }    
+    }
   },
   {
     label: 'Fusagasuga',
     value: 'fusagasuga',
     region:
     {
+      id: 2,
       latitude: 4.3369235,
       longitude: -74.3644854,
       latitudeDelta: 0.1,
@@ -63,11 +67,14 @@ constructor(props){
       city: null,
     };
     this.state = {
+        user: this.props.navigation.state.params.user,
+
         city: undefined,
         address: ' ',
         isMapReady: false,
 
         region: {
+          id: 1,
           latitude: 4.710988599999999,
           longitude: -74.072092,
           latitudeDelta: 0.1,
@@ -98,6 +105,34 @@ constructor(props){
     .catch(error => console.warn(error));
   }
 
+  resgitrar(){
+    axios.post("http://yummyback.herokuapp.com/cities/"+this.state.region.id+"/clients",{
+            client: {
+              name: this.state.user.name,
+              last_name: this.state.user.lastname,
+              birthdate: this.state.user.date,
+              email: this.state.user.email,
+              latitude: this.state.region.latitude,
+              longitude: this.state.region.longitude,
+              address: this.state.address,
+              user: this.state.user.email.split("@")[0],
+              password: this.state.user.password,
+              password_confirmation: this.state.user.confirmPassword,
+              city_id: this.state.region.id
+            }
+        })
+        .then((respJson) => {
+            alert(respJson.data)
+            this.props.navigation.navigate('TabNavigator')
+        })
+        .catch( (err) => {
+            if(err.response && err.response.data)
+                alert(err.response.data.message)
+            else
+                alert("Ocurrio un error por favor intenta más tarde.");
+        });
+  }
+
   changeRegion(){
     for (var i = 0; i < cities.length; i++) {
       if (cities[i].value == this.state.city){
@@ -125,7 +160,7 @@ constructor(props){
               placeholder={placeholder}
               items={cities}
               onValueChange={(value) => {
-                this.setState({city: value,}, () => this.changeRegion()); 
+                this.setState({city: value,}, () => this.changeRegion());
               }}
               style={styles.pickerSelectStyle}
               value={this.state.city}
@@ -169,7 +204,7 @@ constructor(props){
             <Button
               title="Done! "
               color="#BF2A6B"
-              onPress={() => this.props.navigation.navigate('TabNavigator')}
+              onPress={() => this.resgitrar()}
           />
           </View>
         </View>
@@ -184,7 +219,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     padding: 10,
-  },  
+  },
   map: {
     flex: 1,
     height: 300,
