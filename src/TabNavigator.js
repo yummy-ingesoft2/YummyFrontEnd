@@ -39,6 +39,7 @@ export default createBottomTabNavigator (
     tabBarOptions: {
       activeTintColor: '#DF74A2',
       inactiveTintColor: 'gray',
+      showIcon: true, 
     },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',

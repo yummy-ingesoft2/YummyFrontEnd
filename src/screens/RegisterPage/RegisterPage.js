@@ -1,9 +1,29 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Text, TextInput, View, StyleSheet, Image, Button } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Image, Button, TouchableOpacity, ScrollView, PanResponder } from 'react-native';
 import { Constants } from 'expo';
+import DatePicker from 'react-native-datepicker';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+
+var radio_props = [
+  {label: 'Male', value: 0 },
+  {label: 'female', value: 1 }
+];
 
 export default class RegisterPage extends Component {
+
+static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+
+    return {
+      title: params ? params.otherParam : '               Yummy!',
+      /* These values are used instead of the shared configuration! */
+      headerStyle: {
+        backgroundColor: "#d93078",
+      },
+      headerTintColor: "white",
+    };
+};
   constructor(props){
     super(props);
 
@@ -14,6 +34,7 @@ export default class RegisterPage extends Component {
       lastnameValidate: true,
       date: ' ',
       dateValidate: true,
+      value: 0,
       email: ' ',
       emailValidate: true,
       phone: ' ',
@@ -24,6 +45,17 @@ export default class RegisterPage extends Component {
       confirmPasswordValidate: true,
       confPassword: ' '
     };
+  }
+
+  componentWillMount() {
+    this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (e) => {console.log('onStartShouldSetPanResponder'); return true;},
+      onMoveShouldSetPanResponder: (e) => {console.log('onMoveShouldSetPanResponder'); return true;},
+      onPanResponderGrant: (e) => console.log('onPanResponderGrant'),
+      onPanResponderMove: (e) => console.log('onPanResponderMove'),
+      onPanResponderRelease: (e) => console.log('onPanResponderRelease'),
+      onPanResponderTerminate: (e) => console.log('onPanResponderTerminate')
+    });
   }
 
   confirm(){
@@ -121,7 +153,7 @@ export default class RegisterPage extends Component {
       this.setState({
         password:text,
       })
-      if(text.length >= 8)
+      if(text.length >= 6)
       {
         this.state.confPassword = text
         this.setState({
@@ -156,119 +188,257 @@ export default class RegisterPage extends Component {
   }
   render(){
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={[styles.logmail, !this.state.nameValidate? styles.error:null]}
-          placeholder="Nombre"
-          onChangeText={(text) => this.validate(text, 'name')}
-        />
-        <TextInput
-          style={[styles.logmail, !this.state.lastnameValidate? styles.error:null]}
-          placeholder="Apellido"
-          onChangeText={(text) => this.validate(text, 'lastname')}
-        />
-        <TextInput
-          style={styles.logmail}
-          type="date"
-          placeholder="Fecha de nacimiento"
-          onChangeText={(text) => this.validate({text})}
-        />
-        <TextInput
-          style={[styles.logmail, !this.state.emailValidate? styles.error:null]}
-          type="email"
-          placeholder="Email"
-          onChangeText={(text) => this.validate(text, 'email')}
-        />
-        <TextInput
-          style={[styles.logmail, !this.state.phoneValidate? styles.error:null]}
-          placeholder="Teléfono"
-          onChangeText={(text) => this.validate(text, 'phone')}
-        />
-        <TextInput
-          style={[styles.logpass, !this.state.passwordValidate? styles.error:null]}
-          type="password"
-          placeholder="Contraseña"
-          secureTextEntry={true}
-          onChangeText={(text) => this.validate(text, 'password')}
-        />
-        <TextInput
-          style={[styles.logpass, !this.state.confirmPasswordValidate? styles.error:null]}
-          type="password"
-          placeholder="Confirmar Contraseña"
-          secureTextEntry={true}
-          onChangeText={(text) => this.validate(text, 'confirmPassword')}
-        />
-        <View style = {styles.lineStyle} />
-        <View style={styles.buttonSignUp}>
-          <Button
-            disabled={this.confirm()}
-            title="Registrar"
-            color="#DF74A2"
-            onPress={() => this.props.navigation.navigate('TabNavigator')}
-        />
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={styles.container}>
+          <Text style={styles.text}>
+            Signing Up !
+          </Text>
+          <View style={styles.sectionTextField}>
+            <TextInput
+              style={[styles.inputTxt, !this.state.nameValidate? styles.error:null]}
+              placeholder="Name"
+              onChangeText={(text) => this.validate(text, 'name')}
+            />
+            <Image
+              style={styles.iconTxt}
+              source={require('../../assets/userIcon.png')}
+            />
+          </View>
+
+          <View style={styles.sectionTextField}>
+            <TextInput
+              style={[styles.inputTxt, !this.state.lastnameValidate? styles.error:null]}
+              placeholder="Last Name"
+              onChangeText={(text) => this.validate(text, 'lastname')}
+            />
+            <Image
+              style={styles.iconTxt}
+              source={require('../../assets/userIcon.png')}
+            />
+          </View>
+
+          <DatePicker
+            style={styles.datePicker}
+            date={this.state.date}
+            mode="date"
+            placeholder="Birth Date"
+            format="YYYY-MM-DD"
+            minDate="1945-01-01"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            iconSource={require('../../assets/calendarIcon.png')}
+            onDateChange={(date) => {this.setState({date: date});}}
+          />
+
+          <RadioForm
+            radio_props={radio_props}
+            initial={-1}
+            formHorizontal={true}
+            buttonColor = {'gray'}
+            selectedButtonColor = {'gray'}
+            buttonInnerSize = {10}
+            buttonOuterSize = {25}
+            animation={false}
+            onPress={(value) => {this.setState({value:value})}}
+          />
+
+          <View style={styles.sectionTextField}>
+            <TextInput
+              style={[styles.inputTxt, !this.state.emailValidate? styles.error:null]}
+              type="email"
+              placeholder="Email"
+              onChangeText={(text) => this.validate(text, 'email')}
+            />
+            <Image
+              style={styles.iconTxt}
+              source={require('../../assets/emailIcon.png')}
+            />
+          </View>
+
+          <View style={styles.sectionTextField}>
+            <TextInput
+              style={[styles.inputTxt, !this.state.phoneValidate? styles.error:null]}
+              placeholder="Phone"
+              onChangeText={(text) => this.validate(text, 'phone')}
+            />
+            <Image
+              style={styles.iconTxt}
+              source={require('../../assets/phoneIcon.png')}
+            />
+          </View>
+
+          <View style={styles.sectionTextField}>
+            <TextInput
+              style={[styles.inputTxt, !this.state.passwordValidate? styles.error:null]}
+              type="password"
+              placeholder="Password"
+              secureTextEntry={true}
+              onChangeText={(text) => this.validate(text, 'password')}
+            />
+            <Image
+              style={styles.iconTxt}
+              source={require('../../assets/passwordIcon.png')}
+            />
+          </View>
+
+          <View style={styles.sectionTextField}>
+            <TextInput
+              style={[styles.inputTxt, !this.state.confirmPasswordValidate? styles.error:null]}
+              type="password"
+              placeholder="Confirm Password"
+              secureTextEntry={true}
+              onChangeText={(text) => this.validate(text, 'confirmPassword')}
+            />
+            <Image
+              style={styles.iconTxt}
+              source={require('../../assets/passwordIcon.png')}
+            />
+          </View>
+
+          <View style = {styles.lineStyle} />
+
+          <View style={styles.buttonSignUp}>
+            <Button
+              disabled={this.confirm()}
+              title="Sign Up"
+              color="#BF2A6B"
+              onPress={() => this.props.navigation.navigate('Register2',{user:this.state})}
+          />
+          </View>
+
+          <View>
+            <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5}>
+              <Image
+                source={require('../../assets/facebook.jpeg')}
+                style={styles.ImageIconStyle}
+              />
+              <View style={styles.SeparatorLine} />
+              <Text style={styles.TextStyle}> Sign Up Using Facebook </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.GooglePlusStyle} activeOpacity={0.5}>
+              <Image
+                source={require('../../assets/google-plus.jpeg')}
+                style={styles.ImageIconStyle}
+                />
+              <View style={styles.SeparatorLine} />
+              <Text style={styles.TextStyle}> Sign Up Using Google </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  scroll: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  datePicker: {
+    borderRadius: 10,
+    borderColor: 'gray',
+    marginTop: 20,
+    marginBottom: 20,
+    width: 200,
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    backgroundColor: '#d93078',
+    backgroundColor: 'white',
     alignItems: 'center',
-    paddingTop: 25,
+    paddingTop: 15,
+    paddingBottom: 32,
   },
-  logmail: {
-    height: 35,
-    width: 250,
-    padding: 10,
+  sectionTextField: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderColor: 'gray',
+    height: 40,
+    borderRadius: 5,
     marginTop: 20,
+  },
+  iconTxt: {
+    padding: 10,
+    margin: 5,
+    height: 25,
+    width: 25,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+  },
+  inputTxt: {
+    height: 40,
+    width: 250,
     fontSize: 15,
     textAlign: 'center',
-    borderBottomWidth: 1,
-    borderColor: 'white',
-    borderRadius: 10,
-    backgroundColor: '#BF2A6B',
-  },
-  logpass: {
-    height: 35,
-    width: 250,
-    padding: 10,
-    marginTop: 20,
-    marginBottom: 15,
-    fontSize: 15,
-    textAlign: 'center',
-    borderBottomWidth: 1,
-    borderColor: 'white',
-    borderRadius: 10,
-    backgroundColor: '#BF2A6B',
+    backgroundColor: 'white',
   },
   buttonSignUp: {
     height: 40,
     width: 110,
-    marginTop: 5,
     fontSize: 20,
     textAlign: 'center',
-    borderRadius: 5,
     backgroundColor: '#BF2A6B',
+    marginBottom: 10,
+  },
+  GooglePlusStyle: {
+    flexDirection: 'row',
+    width: 200,
+    alignItems: 'center',
+    backgroundColor: '#dc4e41',
+    borderWidth: .5,
+    borderColor: '#fff',
+    height: 40,
+    borderRadius: 10 ,
+    margin: 5,
+  },
+  FacebookStyle: {
+    flexDirection: 'row',
+    width: 200,
+    alignItems: 'center',
+    backgroundColor: '#485a96',
+    borderWidth: .5,
+    borderColor: 'gray',
+    height: 40,
+    borderRadius: 10 ,
+    margin: 5,
+
+  },
+  ImageIconStyle: {
+    padding: 10,
+    margin: 5,
+    height: 25,
+    width: 25,
+    resizeMode : 'stretch',
+  },
+  TextStyle :{
+    color: "#fff",
+    marginBottom : 4,
+    marginRight :20,
+  },
+  SeparatorLine :{
+    backgroundColor : '#fff',
+    width: 1,
+    height: 40
   },
   lineStyle: {
-        width: 280,
-        borderWidth: 0.5,
-        borderColor:'gray',
-        margin:10,
+    width: 300,
+    borderWidth: 0.5,
+    borderColor:'gray',
+    marginTop:35,
+    marginBottom: 25,
    },
-  textSignUp: {
-    marginTop: 8,
-    fontSize: 15,
-    textAlign: 'center',
-    backgroundColor: '#d93078',
-    color: 'white'
+  text: {
+    marginTop: 10,
+    fontSize: 38,
+    color: 'black'
   },
   error:{
-    borderWidth: 3,
+    borderBottomWidth: 3,
     borderColor: 'red'
   }
 });
