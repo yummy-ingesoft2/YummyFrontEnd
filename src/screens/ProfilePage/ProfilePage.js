@@ -14,7 +14,7 @@ class ProfilePage extends React.Component {
        header: () => null
     }
   }
-  
+
   render(){
     return (
       <ScrollView>
@@ -33,7 +33,7 @@ class ProfilePage extends React.Component {
 
           <View>
             <Text style={styles.nameText}>
-              Name Lastname 
+              Name Lastname
             </Text>
           </View>
           <View style = {styles.lineStyle} />
@@ -51,7 +51,7 @@ class ProfilePage extends React.Component {
               source={require('../../assets/phoneIcon.png')}
             />
             <Text style={styles.paragraph}>
-              +1 365 45 85 
+              +1 365 45 85
             </Text>
           </View>
           <View>
@@ -75,7 +75,7 @@ class ProfilePage extends React.Component {
               source={require('../../assets/calendarIcon.png')}
             />
             <Text style={styles.paragraph}>
-              14/06/1994 
+              14/06/1994
             </Text>
           </View>
           <View>
@@ -97,12 +97,12 @@ class ProfilePage extends React.Component {
               <Text style={styles.TextStyle}> Go Cook </Text> 
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} activeOpacity={0.5}> 
-              <Image 
-                source={require('../../assets/editIcon.png')} 
-                style={styles.iconButton} 
-              /> 
-              <Text style={styles.TextStyle}> Edit Profile </Text> 
+            <TouchableOpacity style={styles.button} activeOpacity={0.5}>
+              <Image
+                source={require('../../assets/editIcon.png')}
+                style={styles.iconButton}
+              />
+              <Text style={styles.TextStyle}> Edit Profile </Text>
             </TouchableOpacity>
           </View>
 
@@ -147,14 +147,14 @@ const styles = StyleSheet.create({
     marginLeft: 80,
     fontSize: 20,
     color: 'black',
-  }, 
+  },
   icon: {
     height: 30,
     width: 30,
     marginTop: 40,
     marginLeft: 35,
     justifyContent: 'center',
-    alignItems: 'center' 
+    alignItems: 'center'
   },
   TextStyle: {
     color: "#fff",
@@ -165,15 +165,15 @@ const styles = StyleSheet.create({
     padding: 15,
     margin: 5,
     height: 15,
-    width: 15, 
-  }, 
+    width: 15,
+  },
   lineStyle: {
     width: 280,
     borderWidth: 0.5,
     borderColor:'gray',
     marginBottom:25,
     marginLeft: 40,
-  }, 
+  },
   photo: {
     height: 150,
     width: 150,
@@ -181,10 +181,10 @@ const styles = StyleSheet.create({
     marginLeft: 105,
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.8, 
+    opacity: 0.8,
     borderRadius: 100,
   },
-  button: {    
+  button: {
     flexDirection: 'row',
     height: 40,
     width: 132,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#d93078',
   },
-  buttonContainer: {    
+  buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 25,

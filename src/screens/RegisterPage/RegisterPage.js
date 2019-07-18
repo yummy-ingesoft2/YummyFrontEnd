@@ -302,7 +302,7 @@ static navigationOptions = ({ navigation }) => {
               disabled={this.confirm()}
               title="Sign Up"
               color="#BF2A6B"
-              onPress={() => this.props.navigation.navigate('Register2')}
+              onPress={() => this.props.navigation.navigate('Register2',{user:this.state})}
           />
           </View>
 

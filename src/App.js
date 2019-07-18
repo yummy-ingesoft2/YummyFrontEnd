@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 import LandingPage from './screens/LandingPage/LandingPage';
 import LoginPage from './screens/LoginPage/LoginPage';
 import RegisterPage from './screens/RegisterPage/RegisterPage';
+import RegisterPage2 from './screens/RegisterPage/RegisterPage2';
 import ProductPage from './screens/ProductPage/ProductPage';
 import Reviews from './screens/ProductPage/Reviews';
 import AddProduct from './screens/ProductPage/AddProduct';
@@ -14,13 +15,14 @@ const AppNavigator = createStackNavigator({
     Landing: { screen: LandingPage },
     Login: { screen: LoginPage },
     Register: { screen: RegisterPage },
+    Register2: { screen: RegisterPage2 },
     Product: { screen: ProductPage },
     Reviews: { screen: Reviews },
     AddProduct: { screen: AddProduct },
     TabNavigator: { screen: createBottomTabNavigator,
                     navigationOptions: {
                         header: null,
-                    } 
+                    }
                   }
   },
   {
